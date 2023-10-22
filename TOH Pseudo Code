@@ -1,0 +1,14 @@
+TOH(n, x, y, z)
+{
+   if (n >= 1)
+   {
+      // put (n-1) disk to z by using y
+      TOH((n-1), x, z, y)
+   
+       // move larger disk to right place
+       move:x-->y
+     
+      // put (n-1) disk to right place 
+      TOH((n-1), z, y, x)
+   }
+}
