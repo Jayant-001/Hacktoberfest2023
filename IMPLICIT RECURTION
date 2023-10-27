@@ -1,0 +1,50 @@
+// File: routes/tasks.js
+
+const express = require('express');
+const router = express.Router();
+
+// Assuming you have a tasks array or a database to store tasks
+const tasks = [
+  { id: 1, description: 'Task 1', completed: false },
+  { id: 2, description: 'Task 2', completed: false },
+  // ... other tasks
+];
+
+/**
+ * Endpoint: POST /tasks/complete/:taskId
+ * Description: Mark a task as completed.
+ * Params:
+ *   - taskId (integer): The ID of the task to mark as completed.
+ * Response:
+ *   - 200 OK: Task marked as completed successfully.
+ *   - 404 Not Found: Task with the given ID not found.
+ */
+router.post('/complete/:taskId', (req, res) => {
+  // Extract taskId from the request parameters
+  const taskId = parseInt(req.params.taskId);
+
+  // Find the index of the task in the tasks array
+  const taskIndex = tasks.findIndex(task => task.id === taskId);
+
+  if (taskIndex !== -1) {
+    // Mark the task as completed
+    tasks[taskIndex].completed = true;
+
+    // Send a success response
+    res.json({ success: true, message: 'Task marked as completed' });
+  } else {
+    // Send a 404 response if the task is not found
+    res.status(404).json({ success: false, message: 'Task not found' });
+  }
+});
+
+module.exports = router;
+
+
+In this example:
+
+Each section is separated with comments for clarity.
+The purpose of the file and the specific endpoint is clearly mentioned at the beginning.
+The expected request parameters and possible responses are documented.
+Comments within the function explain the logic step by step.
+This kind of detailed commenting helps not only someone studying the code but also future maintainers or collaborators. Adjust the comments based on the actual complexity and requirements of your project. Always aim for clarity and readability.
